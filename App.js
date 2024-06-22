@@ -3,9 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './components/LoginScreen';
 import HomeScreen from './components/HomeScreen';
-import DescripcionScreen from './components/DescripcionScreen';
+import InformacionScreen from './components/InformacionScreen';
 import CatalogoScreen from './components/CatalogoScreen';
 import ProbadorVirtualScreen from './components/ProbadorVirtualScreen';
+import DetalleProductoScreen from './components/DetalleProductoScreen'; // Importa DetalleProductoScreen
 
 const Stack = createStackNavigator();
 
@@ -24,9 +25,9 @@ export default function App() {
           options={{ title: 'Home' }}
         />
         <Stack.Screen
-          name="Descripcion"
-          component={DescripcionScreen}
-          options={{ title: 'Descripción' }}
+          name="Informacion"
+          component={InformacionScreen}
+          options={{ title: 'Información' }}
         />
         <Stack.Screen
           name="Catalogo"
@@ -37,6 +38,11 @@ export default function App() {
           name="ProbadorVirtual"
           component={ProbadorVirtualScreen}
           options={{ title: 'Probador Virtual' }}
+        />
+        <Stack.Screen
+          name="DetalleProducto"
+          component={DetalleProductoScreen}
+          options={{ title: 'Detalle del Producto' }} // Opcional: Cambia el título según lo necesites
         />
       </Stack.Navigator>
     </NavigationContainer>

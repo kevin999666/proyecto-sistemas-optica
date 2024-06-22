@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-const DescripcionScreen = () => {
+const InformacionScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Descripción</Text>
+      <Text style={styles.title}>Información</Text>
       <View style={styles.flexContainer}>
         <View style={styles.imageContainer}>
           <Image
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DescripcionScreen;
+export default InformacionScreen;
