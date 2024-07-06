@@ -6,7 +6,8 @@ import HomeScreen from './components/HomeScreen';
 import InformacionScreen from './components/InformacionScreen';
 import CatalogoScreen from './components/CatalogoScreen';
 import ProbadorVirtualScreen from './components/ProbadorVirtualScreen';
-import DetalleProductoScreen from './components/DetalleProductoScreen'; // Importa DetalleProductoScreen
+import DetalleProductoScreen from './components/DetalleProductoScreen';
+import DiagnosticoScreen from './components/DiagnosticoScreen'; // Importa DiagnosticoScreen
 
 const Stack = createStackNavigator();
 
@@ -42,7 +43,13 @@ export default function App() {
         <Stack.Screen
           name="DetalleProducto"
           component={DetalleProductoScreen}
-          options={{ title: 'Detalle del Producto' }} // Opcional: Cambia el título según lo necesites
+          options={{ title: 'Detalle del Producto' }}
+        />
+        {/* Agrega la pantalla DiagnosticoScreen */}
+        <Stack.Screen
+          name="Diagnostico"
+          component={DiagnosticoScreen}
+          options={{ title: 'Diagnóstico' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
