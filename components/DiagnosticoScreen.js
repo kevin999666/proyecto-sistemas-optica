@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    height: 200,
+    height: 300, // Ajustar el tamaño de la imagen según tu preferencia
   },
   imagen: {
     width: '100%',

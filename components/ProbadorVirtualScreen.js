@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, Button, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { Camera } from 'expo-camera';
 
@@ -8,7 +8,7 @@ const ProbadorVirtualScreen = () => {
   const [photo, setPhoto] = useState(null);
   const [selectedProductImage, setSelectedProductImage] = useState(null);
   const [productImageStyles, setProductImageStyles] = useState({
-    width: 150, // Ajusta el tamaño inicial del producto
+    width: 300, // Ajusta el tamaño inicial del producto
     height: 'auto',
     top: '50%',
     left: '50%',
@@ -29,7 +29,7 @@ const ProbadorVirtualScreen = () => {
     // Agregar más productos según sea necesario
   ];
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
       setHasPermission(status === 'granted');
@@ -38,7 +38,7 @@ const ProbadorVirtualScreen = () => {
 
   const takePicture = async () => {
     if (cameraRef) {
-      let photo = await cameraRef.takePictureAsync();
+      const photo = await cameraRef.takePictureAsync();
       setPhoto(photo.uri);
     }
   };
@@ -91,9 +91,8 @@ const ProbadorVirtualScreen = () => {
   const handleScaleImage = (factor) => {
     if (!selectedProductImage || !productImageStyles.width) return;
 
-    let newWidth = parseInt(productImageStyles.width) * factor;
-    let aspectRatio = newWidth / parseInt(productImageStyles.width);
-    let newHeight = parseInt(productImageStyles.height) * aspectRatio;
+    let newWidth = productImageStyles.width * factor;
+    let newHeight = productImageStyles.height * factor;
 
     setProductImageStyles({
       ...productImageStyles,
@@ -138,6 +137,7 @@ const ProbadorVirtualScreen = () => {
               <Image
                 source={{ uri: selectedProductImage }}
                 style={[styles.productImage, productImageStyles]}
+                resizeMode="contain" // Añadir resizeMode para asegurar que la imagen se ajuste correctamente
               />
             )}
           </View>
