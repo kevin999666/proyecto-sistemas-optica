@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Image, FlatList } from 'react-native';
 
 const DiagnosticoScreen = () => {
   const [imageUrl, setImageUrl] = useState('https://media.istockphoto.com/id/1387508073/es/vector/revisi%C3%B3n-de-la-vista-tabla-de-pruebas-oculares-examen-de-la-vista-revisar-la-tabla-de-visi%C3%B3n.jpg?s=612x612&w=0&k=20&c=lXI3D4UUhxPjixeZdiAhncJ4DNW4cQGXGYMSfAC8MLA=');
   const [fila, setFila] = useState('');
   const [malestar, setMalestar] = useState('');
   const [procedimiento, setProcedimiento] = useState('');
+  const [diagnosticos, setDiagnosticos] = useState([]);
 
   const agregarDiagnostico = () => {
-    // Implementación del envío del formulario de diagnóstico
+    const nuevoDiagnostico = {
+      id: diagnosticos.length.toString(),
+      fila,
+      malestar,
+      procedimiento
+    };
+    setDiagnosticos([...diagnosticos, nuevoDiagnostico]);
+    setFila('');
+    setMalestar('');
+    setProcedimiento('');
   };
+
+  const renderItem = ({ item }) => (
+    <View style={styles.diagnosticoItem}>
+      <Text style={styles.diagnosticoText}>Fila: {item.fila}</Text>
+      <Text style={styles.diagnosticoText}>Malestar: {item.malestar}</Text>
+      <Text style={styles.diagnosticoText}>Procedimiento: {item.procedimiento}</Text>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -44,6 +62,12 @@ const DiagnosticoScreen = () => {
         />
         <Button title="Enviar" onPress={agregarDiagnostico} />
       </View>
+      <FlatList
+        data={diagnosticos}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        style={styles.listaDiagnosticos}
+      />
     </View>
   );
 };
@@ -51,17 +75,15 @@ const DiagnosticoScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: 20,
     backgroundColor: '#fff',
   },
   imagenContainer: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
+    height: 200,
   },
   imagen: {
     width: '100%',
@@ -82,6 +104,17 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 20,
     borderRadius: 5,
+  },
+  listaDiagnosticos: {
+    marginTop: 20,
+  },
+  diagnosticoItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  diagnosticoText: {
+    fontSize: 16,
   },
 });
 

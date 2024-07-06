@@ -1,30 +1,23 @@
 import React from 'react';
-import { View, Button, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HomeScreen = ({ navigation }) => {
   // Array de botones de navegación con iconos
   const botones = [
-    { key: 'Informacion', title: 'Información', icon: 'info-circle' },
-    { key: 'Catalogo', title: 'Catálogo', icon: 'shopping-cart' },
-    { key: 'ProbadorVirtual', title: 'Probador Virtual', icon: 'magic' },
-    { key: 'Diagnostico', title: 'Diagnóstico', icon: 'heartbeat' }
+    { key: 'Informacion', title: 'Información', icon: 'info-circle', color: '#3498db' },
+    { key: 'Catalogo', title: 'Catálogo', icon: 'shopping-cart', color: '#e67e22' },
+    { key: 'ProbadorVirtual', title: 'Probador Virtual', icon: 'magic', color: '#9b59b6' },
+    { key: 'Diagnostico', title: 'Diagnóstico', icon: 'heartbeat', color: '#e74c3c' }
   ];
 
   const renderItem = ({ item }) => (
-    <View style={styles.buttonContainer}>
-      <Icon.Button
-        name={item.icon}
-        backgroundColor="#3b5998"
-        onPress={() => navigation.navigate(item.key)}
-        style={styles.iconButton}
-        iconStyle={styles.icon}
-        borderRadius={0}
-        size={30}
-      >
-        {item.title}
-      </Icon.Button>
-    </View>
+    <TouchableOpacity style={[styles.buttonContainer, { backgroundColor: item.color }]} onPress={() => navigation.navigate(item.key)}>
+      <View style={styles.iconButton}>
+        <Icon name={item.icon} size={30} color="#fff" style={styles.icon} />
+        <Text style={styles.buttonText}>{item.title}</Text>
+      </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -44,20 +37,30 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
   },
   buttonContainer: {
-    width: '100%',
-    marginBottom: 10,
+    width: '90%',
+    marginBottom: 15,
+    borderRadius: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
   },
   iconButton: {
-    justifyContent: 'flex-start',
+    flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 15,
-    paddingVertical: 15,
   },
   icon: {
-    marginRight: 10,
+    marginRight: 15,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#fff',
   },
 });
 
